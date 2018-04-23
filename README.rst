@@ -25,7 +25,7 @@ Features
 Working with an unbound Channel
 ===============================
 
-.. code-block:: console
+.. code-block:: python
 
     >>> import bands
 
@@ -39,7 +39,7 @@ Working with an unbound Channel
 
 Alternatively you can send your message via `bands.send`...
 
-.. code-block:: console
+.. code-block:: python
 
     >>> bands.send('alert', 'ALERT!!')
     ['ALERT!!']
@@ -51,11 +51,11 @@ Working with bound Channel's
 ============================
 A `Channel` is *bound* when it's `parent` attribute is set. If you use
 `bands.channel` as a class attribute, each instance of your class will have
-it's own bound `Channel`. This is very similar to the way bound methods in
-python work, except with bound Channels you're gauranteed to get the same
+it's own bound `Channel`. This is very similar to the way Python methods work,
+except with bound Channels you're gauranteed to get the same
 bound Channel instance everytime you access it.
 
-.. code-block:: console
+.. code-block:: python
 
     >>> import bands
 
@@ -87,7 +87,7 @@ bound Channel instance everytime you access it.
 From the above example, we can see that each bound Channel has it's own
 subscribers. Additionally, if you call send on the unbound Channel, all bound
 channel receivers will also be notified. We can also use bands.send to send
-messages by identifier string.
+messages by identifier.
 
 
 Working with a Band
@@ -102,7 +102,7 @@ the DEFAULT_BAND constant. You can set the active band with `bands.use_band`,
 and get the active band with `bands.get_band`. It may be wise to have a Band
 per application or library.
 
-.. code-block:: console
+.. code-block:: python
 
     >>> import bands
     >>> my_band = bands.Band()
@@ -111,7 +111,7 @@ per application or library.
 You can also provide your own Dispatcher to my_band. Here is an example of a
 LoggingDispatcher.
 
-.. code-block:: console
+.. code-block:: python
 
     >>> import bands
     >>> import logging
@@ -125,7 +125,7 @@ LoggingDispatcher.
     >>> my_band = bands.Band(LoggingDispatcher('my_band'))
 
 The above LoggingDispatcher will log a debug message before every message is
-dispatched to a channels receivers.
+dispatched to a channel's receivers.
 
 
 Installation
