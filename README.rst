@@ -37,14 +37,23 @@ Working with an unbound Channel
     >>> alert.send('alert!!')
     ['ALERT!!']
 
+Alternatively you can send your message via `bands.send`...
+
+.. code-block:: console
+
+    >>> bands.send('alert', 'ALERT!!')
+    ['ALERT!!']
+
+The send method forwards `*args` and `**kwargs` to all of the Channel's
+receivers.
 
 Working with bound Channel's
 ============================
-A Channel is bound when it's *parent* attribute is set. If you use a channel
-as a class attribute, each instance of your class will have it's own bound
-Channel. This is very similar to the way bound methods in python work,
-except with bound Channels, you're gauranteed to get the same bound Channel
-instance everytime you access it.
+A `Channel` is *bound* when it's `parent` attribute is set. If you use
+`bands.channel` as a class attribute, each instance of your class will have
+it's own bound `Channel`. This is very similar to the way bound methods in
+python work, except with bound Channels you're gauranteed to get the same
+bound Channel instance everytime you access it.
 
 .. code-block:: console
 
@@ -83,9 +92,9 @@ messages by identifier string.
 
 Working with a Band
 ===================
-A Band is a group of channels with a Dispatcher used to actually execute a
-Channel's receivers. Messages sent to one Band will not reach another Band's
-Channels or receivers in another Band.
+A `Band` is a group of channels with a `Dispatcher` used to actually execute a
+Channel's receivers. Messages sent to one `Band` will not reach another
+`Band`'s Channels or receivers.
 
 The api functions, `bands.channel` and `bands.send`, delegate their calls to
 the active band. The active band defaults to the default Band accessible via

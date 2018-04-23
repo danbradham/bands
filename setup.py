@@ -8,7 +8,7 @@ setup(
     description=bands.__description__,
     long_description=open('README.rst', 'r').read(),
     author=bands.__author__,
-    author_email=bands.__author_email__,
+    author_email=bands.__email__,
     url=bands.__url__,
     license=bands.__license__,
     py_modules=['bands'],
