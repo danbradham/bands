@@ -81,6 +81,44 @@ channel receivers will also be notified. We can also use bands.send to send
 messages by identifier string.
 
 
+Working with a Band
+===================
+A Band is a group of channels with a Dispatcher used to actually execute a
+Channel's receivers. Messages sent to one Band will not reach another Band's
+Channels or receivers in another Band.
+
+The api functions, `bands.channel` and `bands.send`, delegate their calls to
+the active band. The active band defaults to the default Band accessible via
+the DEFAULT_BAND constant. You can set the active band with `bands.use_band`,
+and get the active band with `bands.get_band`. It may be wise to have a Band
+per application or library.
+
+.. code-block:: console
+
+    >>> import bands
+    >>> my_band = bands.Band()
+    >>> chan = my_band.channel('one')
+
+You can also provide your own Dispatcher to my_band. Here is an example of a
+LoggingDispatcher.
+
+.. code-block:: console
+
+    >>> import bands
+    >>> import logging
+
+    >>> class LoggingDispatcher(bands.Dispatcher):
+    ...     def __init__(self, name):
+    ...         self.log = logging.getLogger(name)
+    ...     def before_dispatch(self, ctx):
+    ...         self.log.debug('Sending %s' % ctx.identifier)
+
+    >>> my_band = bands.Band(LoggingDispatcher('my_band'))
+
+The above LoggingDispatcher will log a debug message before every message is
+dispatched to a channels receivers.
+
+
 Installation
 ============
 
