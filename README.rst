@@ -22,18 +22,17 @@ Features
 - Pluggable Dispatchers
 - Bands - groups of Channels with their own dispatcher
 
-
 Working with an unbound Channel
 ===============================
 
 .. code-block:: console
 
-    >>> from bands import channel
+    >>> import bands
 
     >>> def on_alert(message):
     ...    return message.upper()
 
-    >>> alert = channel('alert')
+    >>> alert = bands.channel('alert')
     >>> alert.connect(on_alert)
     >>> alert.send('alert!!')
     ['ALERT!!']
@@ -50,10 +49,9 @@ instance everytime you access it.
 .. code-block:: console
 
     >>> import bands
-    >>> from bands import channel
 
     >>> class Component(object):
-    ...     started = channel('started')
+    ...     started = bands.channel('started')
     ...     def __init__(self, name):
     ...         self.name = name
     ...         self.started.connect(self.on_started)
@@ -74,7 +72,7 @@ instance everytime you access it.
     ['two.on_started']
     >>> Component.started.send()
     ['one.on_started', 'two.on_started']
-    >>> bands.send('on_started')
+    >>> bands.send('started')
     ['one.on_started', 'two.on_started']
 
 From the above example, we can see that each bound Channel has it's own

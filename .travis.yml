@@ -4,4 +4,4 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-script: nosetests
+script: nosetests -v -s --with-doctest --doctest-extension=rst
