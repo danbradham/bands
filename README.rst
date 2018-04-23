@@ -1,3 +1,8 @@
+
+.. image:: https://raw.github.com/danbradham/bands/master/bands_sm.png
+    :target: https://github.com/danbradham/bands
+    :alt: Bands
+
 .. image:: https://img.shields.io/github/license/danbradham/bands.svg?style=flat-square
     :target: https://github.com/danbradham/bands/blob/master/LICENSE
     :alt: License
