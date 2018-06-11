@@ -242,12 +242,7 @@ class Band(object):
 
         parent = kwargs.pop('parent', None)
         chan = self.channel(identifier, parent)
-        return self.dispatch(
-            identifier,
-            self.get_channel_receivers(chan),
-            *args,
-            **kwargs
-        )
+        return chan.send(*args, **kwargs)
 
     def dispatch(self, identifier, receivers, *args, **kwargs):
         '''Executes a receiver using this Band's Dispatcher'''
