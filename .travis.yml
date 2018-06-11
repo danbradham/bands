@@ -1,19 +1,16 @@
 language: python
-
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
-
+- '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
 script: nosetests -v -s --with-doctest --doctest-extension=rst
-
 deploy:
   provider: pypi
   user: danbradham
   password:
-    secure: "YnZJ5dwoOskhJJodyMkRc8qaOJdM/mmCQQhfaVFEGpOj8AIm2Fp4lYX0gJ4+O9l8+74YvQj7ddEle1IV+gdadEwMYC6U2d3/TdcmZrFNMDwonEkpluhbyZXLstvUb+IUdNJWoi39GP/ET/qYm+jzBj0ZpiCCaOFSgP4GlJmbpytSlqF+OQxf+tk5mvNpeNfrz0fvJ2TGq2InzvLvqzVZtS8a8L3bLcRGp04mhB63Vf/XQjHOZbu3zaZ6+/QDjweWYBsarX0D/cfhiWfJhB/jBS0hBeV4FTZhtm4QFxF817sV5bz0oSyz43/htjtjLuWjU2f/zzaVMa3dPMF44UeI3dQ3HQHb8mNVxNLASUE6OpqmJGGhCqfZErTs/xbpWrOaQ4MczcgMQWLgHMeRrrkCpJ8TLSI8Yz+ZdR+A0g9GYnvK3JCOlE7Gnv5d9fnXmFh/8j4UHr1iC74z5Ve7I60ln5IlKH6eJhgtxDm8G4o6B8z6ap66LXzUK+K1CeLJjaI1TxoBdrOPMBn+IGLHv965cFUkdcD8LDqYUY47cTuHSpgpOv3+OMRGC3vAAXs2Z8bNz0PcTwJIsyQq6Pw/P5+yVFvecyZ3q47GanYLr44NvT2FbheZvl2sajRruSbHSwsQ0s/mMOJBdULAeZ4VR6adNErj+C3jEqSUaZVaAWIw6pA="
+    secure: "CUkKMLgJFjlabbRY6ga8oNr59n0YbOPeA3V5ZCXLDP95P6mehlN5brVn0cNJfyhtm2UFU+z3wFBv8f8cYqWCeaLmbK9x+7MQ0kV40JqLzlfWGwdRztKLcfqIw+aocPwtbg9RcRSyZln9KELPf+Yb3fciBCifV0Btfpq0NODj4orTAhyZWeZn5MwNhX0TGtt3LEpMr++bV3YNkeFFo9y9W9wKpE8sdwINaNI46JIyw2OKdl2BNdhgdecIV7g3hcLDVQ/flFAQub1snhIHW09/gNooEyQ/I/xk55JH9XQlDRRVl+IbiPG98nBsZmfqLKUSWNkKeLlU4kHZyn/VbTJiFp8SeKUxKsKqsT6S7tj97U/kXid4/1lMfCB5qgRpL0fdw132P8m4FVPjqF7zRGK8EJTWaySVLVzF8VbLzpVYGMvGsUmQ5wuKcaAwHhVpOgA2kpR9MzO3VXcfNMFBE1oIWDrkLqoUuXcQ5gl5ahzq9kNEsbNtqoYpE/EHxgagQy3O7yA/o02ScX3wJ7p5AaSkU4LwPC63zJ6Qb7yCfAnJUvX80MQrmvD0yB8XyjMX07yW9Ze7w5ouXeFvOPfaFqUpPUFVMD+SVplt0XsnO6UwdVOgc+bCTeQBuWUhwsUzLLFlYk0hyKkIQaSft9rRMGbksanhgyiI6ibERSFEcz9aIH4="
   on:
     branch: master
-    tags: True
+    tags: true
   distributions: sdist bdist_wheel
