@@ -8,6 +8,7 @@ from __future__ import absolute_import, print_function
 __all__ = [
     'WeakRef',
     'WeakMeth',
+    'StrongRef',
     'WeakSet',
     'Context',
     'Dispatcher',
@@ -24,12 +25,13 @@ __all__ = [
     'is_dispatcher',
     'is_band',
     'is_channel',
+    'is_method',
 ]
 __title__ = 'bands'
 __author__ = 'Dan Bradham'
 __email__ = 'danielbradham@gmail.com'
 __url__ = 'https://github.com/danielbradham/bands.git'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __description__ = 'Another message passing library.'
 __license__ = 'MIT'
 
@@ -56,9 +58,19 @@ class WeakMeth(object):
         return getattr(inst, self.name)
 
 
+class StrongRef(object):
+    '''Hold a reference to an object.'''
+
+    def __init__(self, obj, callback=None):
+        self.name = obj.__name__
+        self.obj = obj
+
+    def __call__(self):
+        return self.obj
+
+
 class WeakSet(object):
-    '''A weakset implementation that supports methods. This is not really a
-    set, it does support add and discard, so it acts like a set. The underlying
+    '''A weakset implementation that supports methods. The underlying
     data is stored as list so it will remain ordered unlike a true set.
     '''
 
@@ -88,8 +100,10 @@ class WeakSet(object):
             yield obj
 
     def _ref_id(self, obj):
-        if inspect.ismethod(obj):
-            return (id(obj.__self__), id(obj.__func__))
+        if is_method(obj):
+            if hasattr(obj, '__func__'):
+                return id(obj.__self__), id(obj.__func__)
+            return id(obj.__self__), id(obj.__name__)
         else:
             return id(obj)
 
@@ -102,13 +116,16 @@ class WeakSet(object):
         self._ids.pop(index)
         self._refs.pop(index)
 
-    def add(self, obj):
+    def add(self, obj, strong=False):
         ref_id = self._ref_id(obj)
         if ref_id in self._ids:
             return
 
         self._ids.append(ref_id)
-        if inspect.ismethod(obj):
+        if strong:
+            ref = StrongRef(obj)
+            ref.ref_id = ref_id
+        elif is_method(obj):
             ref = WeakMeth(obj, self._remove_ref)
             ref.ref.ref_id = ref_id
         else:
@@ -224,7 +241,13 @@ class Band(object):
         '''Send a message to a channel with the given identifier.'''
 
         parent = kwargs.pop('parent', None)
-        return self.channel(identifier, parent).send(*args, **kwargs)
+        chan = self.channel(identifier, parent)
+        return self.dispatch(
+            identifier,
+            self.get_channel_receivers(chan),
+            *args,
+            **kwargs
+        )
 
     def dispatch(self, identifier, receivers, *args, **kwargs):
         '''Executes a receiver using this Band's Dispatcher'''
@@ -352,8 +375,8 @@ class Channel(object):
             *args, **kwargs
         )
 
-    def connect(self, obj):
-        self.receivers.add(obj)
+    def connect(self, obj, strong=False):
+        self.receivers.add(obj, strong)
 
     def disconnect(self, obj):
         self.receivers.discard(obj)
@@ -428,3 +451,7 @@ def is_band(obj):
 
 def is_channel(obj):
     return isinstance(obj, Channel)
+
+
+def is_method(obj):
+    return hasattr(obj, '__call__') and hasattr(obj, '__self__')

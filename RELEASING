@@ -1,0 +1,7 @@
+Releasing a new version
+=======================
+
+1. Update the version in bands.py following semantic versioning (X.Y.Z)
+2. Update the release notes and release date in CHANGES
+3. Add a tag with the release version
+4. Push the tag triggering travis to deploy to pypi

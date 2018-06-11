@@ -106,4 +106,25 @@ def test_unbound_channel():
     assert chan.send() == []
 
 
-# TODO: Test Band with custom Dispatcher
+def test_strongref():
+    '''Test strong references'''
+
+    weak = lambda: 'weak'
+    strong = lambda: 'strong'
+
+    chan = channel('anon')
+    chan.connect(weak)
+    chan.connect(strong, strong=True)
+
+    assert chan.send() == ['weak', 'strong']
+
+    del(weak)
+    del(strong)
+
+    # Our strong receiver is still alive!
+    assert chan.send() == ['strong']
+
+    # Make sure disconnecting strong receivers works
+    strong = list(chan.receivers)[0]
+    chan.disconnect(strong)
+    assert chan.send() == []

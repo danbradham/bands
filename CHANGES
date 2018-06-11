@@ -1,0 +1,27 @@
+Release Notes
+=============
+
+
+v0.1.2 (2018-06-10)
+------------------
+
+* Add StrongRef class to support anonymous functions like lambdas.
+
+    - WeakSet.add and Channel.connect now accept a strong keyword argument
+
+
+v0.1.1 (2018-04-23)
+------------------
+
+* Add bands icon
+* Add doctests to travis config
+
+
+v0.1.0 (2018-04-23)
+------------------
+
+* Add WeakSet class that supports weak references including methods
+* Add Band class to manage a set of channels
+* Add Dispatcher class to support customizing how messages are sent to
+  channel receivers. Each Band has it's own Dispatcher.
+* Add Channel class to connect and send messages to receivers

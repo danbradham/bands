@@ -1,7 +1,19 @@
 language: python
+
 python:
   - "2.7"
   - "3.4"
   - "3.5"
   - "3.6"
+
 script: nosetests -v -s --with-doctest --doctest-extension=rst
+
+deploy:
+  provider: pypi
+  user: danbradham
+  password:
+    secure: "fTgL90CA8d6Qf1e95KeLxLRoB7fepxJsA8PBsTxEEIjkzIZ1/tJb79ldhY2/7S2UDE24ZMYUHHFWaQDowX7qZCrxdZd1fJ01Z2MNHrmTFbhswDV0Wca9BEB40iWwzhfWGXUUp9d70mtkkb63ZiXJX6ep2RD8Bcl9yktpBcbJ9cEVDNtHYfAxlaIMSO4rWgiM4eXhsydy8qhpa+iCamua2TSa2cIRpJcdtR5/DZrJZ//hc02R+tsTw6IXL/Kd/4BuXc/kC0PJ1ZkYwbpfJSQaK5NwdXH69XKIxZ7qB/Bd3F0EJ+uCOyRXEaVQmx3UrGpOVRxwx3VrUyJSDQs9/ClPYBguPGNgq/9XynRyH3hNOWHf19cf/wpBKLnLhovvgIiJAlH7eMsp9ziFxwT23t190d4kKZ+oWZvlKecyBSaydq8BwXev4SgeJ0PiBu8pxJbh3hKt9iKh/gi7Cuph59npWI0t2ufF1gsuE5VTgDZQrOqKDHcjPmG4fz85kg0vKBHq+naki3IV9BPpYBEth/MMSMzcHYGqQNw3BbGAOsqCfVUNlXUDJyEWKPjJ7BP7mM0sGUtImLl7qTMGYec5RC24WaTLQXQ2UYMo24d8wMjx9cyLUc+HMStLDLH27kJBsvZZ/GyB3AE/dD1Ffdy0c3B1UzxmRyq4hVx9sIM9IpBgIeY="
+  on:
+    branch: master
+    tags: True
+  distributions: sdist bdist_wheel
