@@ -1,9 +1,14 @@
 Release Notes
 =============
 
+v0.1.3 (2018-06-14)
+-------------------
+
+* Cleanup
+
 
 v0.1.2 (2018-06-10)
-------------------
+-------------------
 
 * Add StrongRef class to support anonymous functions like lambdas.
 
@@ -11,14 +16,14 @@ v0.1.2 (2018-06-10)
 
 
 v0.1.1 (2018-04-23)
-------------------
+-------------------
 
 * Add bands icon
 * Add doctests to travis config
 
 
 v0.1.0 (2018-04-23)
-------------------
+-------------------
 
 * Add WeakSet class that supports weak references including methods
 * Add Band class to manage a set of channels

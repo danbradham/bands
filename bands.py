@@ -31,7 +31,7 @@ __title__ = 'bands'
 __author__ = 'Dan Bradham'
 __email__ = 'danielbradham@gmail.com'
 __url__ = 'https://github.com/danielbradham/bands.git'
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __description__ = 'Another message passing library.'
 __license__ = 'MIT'
 
